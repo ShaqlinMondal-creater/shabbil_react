@@ -1,0 +1,16 @@
+create a react project with correct folder structor where have four pages for admin dashboard, user(where have table for all user), applications (application table) , access (user access table) and for user have two pages dashboard and application these are different page , after login go to  correct dashboard if this is user then go to user dashboard if admin then go to admin dashboard
+
+there have apis for all what was get 
+
+have sidebar and should collapsable and have there each module icon with name , have header where user name and logout button showing and it should same for all page
+
+create this use tailwind css for that and give the all code with correct folder structure , and should use reusable code
+
+and should have two other page for register(email, mobile, password, confirm password) and login (username, password)
+
+
+set static set up users
+for user: username: shaqlin8905, pwd is: abcd1234
+for admin : username: admin8905, pwd is: admin1234
+
+do this correctly and give the code
