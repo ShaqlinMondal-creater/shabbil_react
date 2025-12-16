@@ -1,37 +1,36 @@
 import { mockApplications } from "../../mock/data";
+import Table from "../../components/Table";  // Import reusable Table component
+import Button from "../../components/Button";  // Import Button component
 
 export default function AdminApplications() {
+  const columns = ["ID", "Title", "Status",];  // Define the table columns
+  const filterApplications = mockApplications.map(({ created_at, ...rest }) => rest);
+
+  const renderActions = (application) => {
+    return (
+      <>
+        <Button type="edit" onClick={() => handleEdit(application)} />
+        <Button type="delete" onClick={() => handleDelete(application)} />
+      </>
+    );
+  };
+
+  const handleEdit = (application) => {
+    console.log("Edit application", application);
+    // You can redirect or open a modal to edit the application here
+  };
+
+  const handleDelete = (application) => {
+    console.log("Delete application", application);
+    // Add your delete logic here
+  };
+
   return (
     <div className="rounded-2xl border border-neutral-200 bg-white p-6">
       <h1 className="text-xl font-bold">Applications</h1>
       <p className="mt-2 text-neutral-600">Admin can see all applications.</p>
 
-      <div className="mt-4 overflow-auto">
-        <table className="w-full text-sm">
-          <thead className="text-left text-neutral-600">
-            <tr>
-              <th className="py-2">ID</th>
-              <th className="py-2">Title</th>
-              <th className="py-2">Status</th>
-              <th className="py-2">Created</th>
-            </tr>
-          </thead>
-          <tbody>
-            {mockApplications.map((a) => (
-              <tr key={a.id} className="border-t border-neutral-200">
-                <td className="py-2">{a.id}</td>
-                <td className="py-2">{a.title}</td>
-                <td className="py-2">
-                  <span className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-semibold text-neutral-700">
-                    {a.status}
-                  </span>
-                </td>
-                <td className="py-2">{a.created_at}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <Table columns={columns} data={filterApplications} actions={renderActions} />  {/* Pass actions function */}
     </div>
   );
 }

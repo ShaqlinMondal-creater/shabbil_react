@@ -1,36 +1,44 @@
 import { mockUsers } from "../../mock/data";
+import Table from "../../components/Table";  // Import reusable Table component
+import Button from "../../components/Button";  // Import Button component
 
 export default function AdminUsers() {
+  // Define the table columns (without password)
+  const columns = ["ID", "Name", "Email", "Role"];
+
+  // Filter out the password field from mockUsers data
+  const filteredUsers = mockUsers.map(({ password, ...rest }) => rest);
+
+  const renderActions = (user) => {
+    return (
+      <>
+        <Button type="edit" onClick={() => handleEdit(user)} />
+        <Button type="delete" onClick={() => handleDelete(user)} />
+        <Button type="view" onClick={() => handleView(user)} />
+      </>
+    );
+  };
+
+  const handleEdit = (user) => {
+    console.log("Edit user", user);
+    // You can redirect or open a modal to edit the user here
+  };
+
+  const handleDelete = (user) => {
+    console.log("Delete user", user);
+    // Add your delete logic here
+  };
+
+  const handleView = (user) => {
+    console.log("View user", user);
+    // Redirect to a user details page or show more info
+  };
+
   return (
     <div className="rounded-2xl border border-neutral-200 bg-white p-6">
       <h1 className="text-xl font-bold">Users</h1>
 
-      <div className="mt-4 overflow-auto">
-        <table className="w-full text-sm">
-          <thead className="text-left text-neutral-600">
-            <tr>
-              <th className="py-2">ID</th>
-              <th className="py-2">Name</th>
-              <th className="py-2">Email</th>
-              <th className="py-2">Role</th>
-            </tr>
-          </thead>
-          <tbody>
-            {mockUsers.map((u) => (
-              <tr key={u.id} className="border-t border-neutral-200">
-                <td className="py-2">{u.id}</td>
-                <td className="py-2">{u.name}</td>
-                <td className="py-2">{u.email}</td>
-                <td className="py-2">
-                  <span className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-semibold text-neutral-700">
-                    {u.role}
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <Table columns={columns} data={filteredUsers} actions={renderActions} />  {/* Pass actions function */}
     </div>
   );
 }
